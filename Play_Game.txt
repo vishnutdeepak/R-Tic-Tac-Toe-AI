@@ -1,0 +1,39 @@
+play.game <- function(){
+pturn = -1
+i =0 
+choicelist = rep(-2,9)
+pos = rep(0,9)
+while(1)
+{
+empty = which(pos==0)
+if((length(empty)==0 )|(draw.board(pos)==1)) { 
+break}
+choice = sample(empty,size =1)
+pos[choice]= pturn
+choicelist[i]=choice
+draw.board(pos)
+pturn = -pturn
+i=i+1
+}
+if(draw.board(pos)==1)
+{
+if(pturn ==1)
+{choicelist[10] = "X_wins"
+}
+if(pturn ==-1)
+{choicelist[10] = "O_wins"
+}
+write(choicelist , file = "data.txt",ncolumns =10, append = TRUE,sep = " ")
+
+return (choicelist)
+}
+else 
+{
+choicelist[10] = "Draw"
+
+write(choicelist , file = "data.txt",ncolumns =10,append = TRUE,sep = " ")
+
+return (choicelist)
+
+}
+}
