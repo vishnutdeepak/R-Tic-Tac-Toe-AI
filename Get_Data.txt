@@ -1,0 +1,23 @@
+get.data <- function(i) {
+if(file.exists("data.txt")){
+file.remove("data.txt")}
+
+while(i>0)
+{
+
+play.game()
+i=i-1
+}
+
+mydata = read.table("data.txt",fill= TRUE)
+mydata = mydata[complete.cases(mydata),]
+ratio = table(mydata$V10)
+ratio = c(ratio["X_wins"],ratio["O_wins"],ratio["Draw"])
+ratio <- ratio[!is.na(ratio)]
+
+dev.off()
+
+barplot(ratio)
+
+
+}
